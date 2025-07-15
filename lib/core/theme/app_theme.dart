@@ -8,12 +8,14 @@ class AppTheme {
     textTheme: AppTextTheme.appTextTheme,
     colorScheme: const ColorScheme.light(
       brightness: Brightness.light,
-      surface: AppColors.materialSeconWhite,
-      onSurface: AppColors.materialBlack,
-      primary: AppColors.materialFirstGreen,
-      onPrimary: AppColors.materialWhite,
-      secondary: AppColors.materialSecondGreen,
-      onSecondary: AppColors.materialFirstGreen,
+      // Using new blue colors for surface and onSurface
+      surface: AppColors.materialSecondBlue, // A lighter blue/grey for surface
+      onSurface: AppColors.materialWhite, // White text on the blue surface
+      // Using pink and green for primary/secondary accents
+      primary: AppColors.materialPink, // Primary accent color
+      onPrimary: AppColors.materialWhite, // White text on primary accent
+      secondary: AppColors.materialGreen, // Secondary accent color
+      onSecondary: AppColors.materialWhite, // White text on secondary accent
     ),
   );
 }
