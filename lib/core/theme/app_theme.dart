@@ -6,16 +6,22 @@ class AppTheme {
   AppTheme._();
   static ThemeData appThem = ThemeData(
     textTheme: AppTextTheme.appTextTheme,
-    colorScheme: const ColorScheme.light(
+    checkboxTheme: const CheckboxThemeData(),
+    dividerTheme: const DividerThemeData(
+      thickness: 0,
+      color: AppColors.materialSoftGrey,
+    ),
+    colorScheme: const ColorScheme.dark(
       brightness: Brightness.light,
-      // Using new blue colors for surface and onSurface
-      surface: AppColors.materialSecondBlue, // A lighter blue/grey for surface
-      onSurface: AppColors.materialWhite, // White text on the blue surface
-      // Using pink and green for primary/secondary accents
-      primary: AppColors.materialPink, // Primary accent color
-      onPrimary: AppColors.materialWhite, // White text on primary accent
-      secondary: AppColors.materialGreen, // Secondary accent color
-      onSecondary: AppColors.materialWhite, // White text on secondary accent
+      surface: AppColors.materialSecondBlue,
+      onSurface: AppColors.materialWhite,
+      primary: AppColors.materialSecondBlue,
+      onPrimary: AppColors.materialWhite,
+      secondary: AppColors.materialThirdBlue,
+      onSecondary: AppColors.materialWhite,
+      primaryContainer: AppColors.materialGrey,
+      onPrimaryContainer: AppColors.materialWhite,
+      secondaryContainer: AppColors.materialSoftGrey,
     ),
   );
 }

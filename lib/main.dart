@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hive_todo/home.dart';
+import 'package:hive_todo/core/theme/app_theme.dart';
+import 'package:hive_todo/views/home/home_view.dart';
 
 void main(List<String> args) async {
   runApp(const Application());
@@ -10,9 +11,10 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: AppTheme.appThem,
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: const HomeView(),
     );
   }
 }
