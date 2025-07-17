@@ -6,6 +6,7 @@ import 'package:hive_todo/extentions/space_exs.dart';
 import 'package:hive_todo/views/tasks/components/task_view_appbar.dart';
 import 'package:hive_todo/views/tasks/widgets/task_view_inputWidget.dart';
 import 'package:hive_todo/views/tasks/widgets/task_view_time_picker.dart';
+import 'package:iconsax/iconsax.dart';
 
 class TaskView extends StatelessWidget {
   TaskView({super.key});
@@ -42,25 +43,49 @@ class TaskView extends StatelessWidget {
                   controller: descriptiomController,
                   hint: AppStrings.taskViewInputTwo,
                 ),
-                25.h,
+                50.h,
                 TaskViewTimePicker(
                   openWidget: () {},
                   pickerWidget: TimePickerWidget(
                     pickerTheme: AppTheme.timeDatePickerTheme,
                   ),
                 ),
-                35.h,
+                25.h,
                 TaskViewTimePicker(
                   openWidget: () {},
                   pickerWidget: DatePickerWidget(
                     pickerTheme: AppTheme.timeDatePickerTheme,
                   ),
                 ),
+                50.h,
+                _buildbottomButtons(),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Row _buildbottomButtons() {
+    return Row(
+      children: [
+        Expanded(
+          child: FilledButton.icon(
+            onPressed: () {},
+            icon: const Icon(Iconsax.trash),
+            label: const Text('Delete Task'),
+          ),
+        ),
+        25.w,
+        Expanded(
+          child: FilledButton.icon(
+            onPressed: () {},
+            icon: const Icon(Iconsax.add_circle),
+            label: const Text('Add Task'),
+          ),
+        ),
+      ],
     );
   }
 

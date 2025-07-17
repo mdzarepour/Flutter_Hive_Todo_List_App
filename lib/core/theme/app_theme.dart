@@ -7,6 +7,14 @@ import 'package:hive_todo/core/theme/app_text_theme.dart';
 class AppTheme {
   AppTheme._();
   static ThemeData appThem = ThemeData(
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        fixedSize: const Size.fromHeight(60),
+        backgroundColor: AppColors.materialThirdBlue,
+        textStyle: AppTextTheme.appTextTheme.bodyMedium,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    ),
     floatingActionButtonTheme: _getFloatinButtonTheme(),
     textTheme: AppTextTheme.appTextTheme,
     inputDecorationTheme: _getInpuTheme(),

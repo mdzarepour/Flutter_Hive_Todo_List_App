@@ -41,5 +41,11 @@ class AppTextTheme {
           .materialWhite, // Changed to white for better contrast on dark backgrounds
       fontWeight: FontWeight.w700,
     ),
+    bodyMedium: GoogleFonts.poppins(
+      fontSize: 17,
+      color: AppColors
+          .materialBlack, // Changed to white for better contrast on dark backgrounds
+      fontWeight: FontWeight.w400,
+    ),
   );
 }

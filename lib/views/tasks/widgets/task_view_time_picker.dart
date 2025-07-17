@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cupertino_date_picker_fork/flutter_cupertino_date_picker_fork.dart';
 import 'package:hive_todo/core/constants/app_strings.dart';
 
 class TaskViewTimePicker extends StatelessWidget {
@@ -28,9 +27,7 @@ class TaskViewTimePicker extends StatelessWidget {
         children: [
           Text(style: textTheme.headlineMedium, AppStrings.taskViewTime),
           InkWell(
-            onTap: () {
-              _showPickerWidget(context);
-            },
+            onTap: () => _showPickerWidget(context),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               height: double.infinity,
