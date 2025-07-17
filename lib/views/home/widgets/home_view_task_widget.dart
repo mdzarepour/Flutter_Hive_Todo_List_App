@@ -20,7 +20,7 @@ class _HomeViewTaskWidgetState extends State<HomeViewTaskWidget> {
         duration: const Duration(milliseconds: 600),
         margin: const EdgeInsets.only(bottom: 15),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10),
           color: scheme.secondary,
         ),
         child: Padding(

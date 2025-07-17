@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_todo/core/constants/app_strings.dart';
 import 'package:hive_todo/extentions/space_exs.dart';
 import 'package:hive_todo/views/home/components/home_view_appbar.dart';
 import 'package:hive_todo/views/home/components/home_view_drawer.dart';
@@ -25,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
       appBar: const HomeViewAppbarState(),
       drawer: const HomeViewDrawer(),
       body: _buildHomeViewBody(scheme, textTheme),
-      floatingActionButton: homeViewFab(),
+      floatingActionButton: const HomeViewFab(),
     );
   }
 
@@ -50,7 +51,10 @@ class _HomeViewState extends State<HomeView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(style: textTheme.headlineLarge, 'My Tasks'),
+                  Text(
+                    style: textTheme.headlineLarge,
+                    AppStrings.homeViewMyTasks,
+                  ),
                   10.h,
                   Text(style: textTheme.titleMedium, '1 of 3 tasks'),
                 ],
@@ -71,14 +75,14 @@ class _HomeViewState extends State<HomeView> {
                         child: LottieBuilder.asset(
                           animate: list.isEmpty ? true : false,
                           height: 200,
-                          'assets/empty_box.json',
+                          AppStrings.homeViewEmptyJson,
                         ),
                       ),
                       FadeInUp(
                         from: 30,
                         child: Text(
                           style: textTheme.headlineMedium,
-                          'You Done All Tasks',
+                          AppStrings.homeViewEmpty,
                         ),
                       ),
                     ],
@@ -96,7 +100,7 @@ class _HomeViewState extends State<HomeView> {
                             Icon(Iconsax.trash, color: scheme.primaryContainer),
                             Text(
                               style: textTheme.titleMedium,
-                              'This Task Was deleted',
+                              AppStrings.homeViewDelete,
                             ),
                           ],
                         ),

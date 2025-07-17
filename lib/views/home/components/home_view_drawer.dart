@@ -30,7 +30,10 @@ class _HomeViewDrawerState extends State<HomeViewDrawer> {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: drawerItems.length,
               itemBuilder: (context, index) {
-                return _generateDraweItems(index);
+                return _generateDraweItems(
+                  index,
+                  Theme.of(context).textTheme.headlineMedium,
+                );
               },
             ),
           ),
@@ -39,7 +42,7 @@ class _HomeViewDrawerState extends State<HomeViewDrawer> {
     );
   }
 
-  _generateDraweItems(int index) {
+  _generateDraweItems(int index, TextStyle? textStyle) {
     bool isSeleted = index == selectedItemIndex;
     return ListTile(
       onTap: () {
@@ -50,6 +53,7 @@ class _HomeViewDrawerState extends State<HomeViewDrawer> {
       splashColor: Colors.transparent,
       selected: isSeleted,
       selectedColor: AppColors.materialGrey,
+      titleTextStyle: textStyle,
       title: Text(drawerItems[index].title),
       leading: Icon(drawerItems[index].icon),
     );

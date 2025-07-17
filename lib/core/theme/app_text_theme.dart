@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_todo/core/constants/app_colors.dart';
@@ -34,6 +33,12 @@ class AppTextTheme {
       fontSize: 12,
       color: AppColors
           .materialPink, // Using the new pink as an accent for small titles
+      fontWeight: FontWeight.w700,
+    ),
+    bodyLarge: GoogleFonts.poppins(
+      fontSize: 45,
+      color: AppColors
+          .materialWhite, // Changed to white for better contrast on dark backgrounds
       fontWeight: FontWeight.w700,
     ),
   );
