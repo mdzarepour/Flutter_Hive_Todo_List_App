@@ -1,6 +1,5 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:hive_todo/extentions/space_exs.dart';
 import 'package:hive_todo/views/home/components/home_view_appbar.dart';
 import 'package:hive_todo/views/home/components/home_view_drawer.dart';
@@ -37,7 +36,7 @@ class _HomeViewState extends State<HomeView> {
         mainAxisSize: MainAxisSize.max,
         children: [
           20.h,
-          // home header -->
+          // header -->
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
