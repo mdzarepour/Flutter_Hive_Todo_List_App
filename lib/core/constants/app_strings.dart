@@ -5,6 +5,8 @@ class AppStrings {
   static const String taskViewAddTwo = 'Task';
   static const String taskViewTime = 'Time';
   static const String taskViewSelectTime = 'Select Time';
+  static const String taskViewAddTask = 'Add Task';
+  static const String taskViewDeleteTask = 'Add Task';
   static const String taskViewInputOne = 'what are you planing ?';
   static const String taskViewInputTwo = 'add note to remember';
   static const String homeViewMyTasks = 'My Tasks';

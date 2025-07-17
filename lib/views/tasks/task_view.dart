@@ -74,7 +74,7 @@ class TaskView extends StatelessWidget {
           child: FilledButton.icon(
             onPressed: () {},
             icon: const Icon(Iconsax.trash),
-            label: const Text('Delete Task'),
+            label: const Text(AppStrings.taskViewAddTask),
           ),
         ),
         25.w,
@@ -82,7 +82,7 @@ class TaskView extends StatelessWidget {
           child: FilledButton.icon(
             onPressed: () {},
             icon: const Icon(Iconsax.add_circle),
-            label: const Text('Add Task'),
+            label: const Text(AppStrings.taskViewDeleteTask),
           ),
         ),
       ],
