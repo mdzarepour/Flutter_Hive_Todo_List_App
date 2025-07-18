@@ -6,7 +6,7 @@ class AppStrings {
   static const String taskViewTime = 'Time';
   static const String taskViewSelectTime = 'Select Time';
   static const String taskViewAddTask = 'Add Task';
-  static const String taskViewDeleteTask = 'Add Task';
+  static const String taskViewDeleteTask = 'Delete Task';
   static const String taskViewInputOne = 'what are you planing ?';
   static const String taskViewInputTwo = 'add note to remember';
   static const String homeViewMyTasks = 'My Tasks';
@@ -17,4 +17,13 @@ class AppStrings {
   static const String drawerHome = 'Home';
   static const String drawerSetting = 'Setting';
   static const String drawerShare = 'Share';
+  static const String dialogEmptyTask = 'dont have any task to delete !';
+  static const String dialogOops = 'Oops';
+  static const String dialogOk = 'Ok';
+  static const String dialogDeteleTask = 'We Gonna Delete This Task';
+  static const String dialogAreSure = 'Are You Sure ?';
+  static const String dialogDelete = 'Yes Delete';
+  static const String dialogCancle = 'Cancl';
+  static const String toastPleaseEdit = 'please edit task then try again';
+  static const String toastPleaseInsert = 'please insert all fields first';
 }

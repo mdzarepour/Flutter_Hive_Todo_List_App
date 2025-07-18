@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker_fork/flutter_cupertino_date_picker_fork.dart';
 import 'package:hive_todo/core/constants/app_strings.dart';
 import 'package:hive_todo/core/theme/app_theme.dart';
+import 'package:hive_todo/core/utils/toas_messages.dart';
 import 'package:hive_todo/extentions/space_exs.dart';
 import 'package:hive_todo/views/tasks/components/task_view_appbar.dart';
 import 'package:hive_todo/views/tasks/widgets/task_view_inputWidget.dart';
@@ -58,7 +59,7 @@ class TaskView extends StatelessWidget {
                   ),
                 ),
                 50.h,
-                _buildbottomButtons(),
+                _buildbottomButtons(context),
               ],
             ),
           ),
@@ -67,22 +68,26 @@ class TaskView extends StatelessWidget {
     );
   }
 
-  Row _buildbottomButtons() {
+  Row _buildbottomButtons(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: FilledButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              updatingTaskEmptyFieldsWarning(context);
+            },
             icon: const Icon(Iconsax.trash),
-            label: const Text(AppStrings.taskViewAddTask),
+            label: const Text(AppStrings.taskViewDeleteTask),
           ),
         ),
         25.w,
         Expanded(
           child: FilledButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              addingTaskEmptyFieldsWarning(context);
+            },
             icon: const Icon(Iconsax.add_circle),
-            label: const Text(AppStrings.taskViewDeleteTask),
+            label: const Text(AppStrings.taskViewAddTask),
           ),
         ),
       ],

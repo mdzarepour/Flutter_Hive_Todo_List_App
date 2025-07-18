@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_todo/core/constants/app_colors.dart';
 import 'package:hive_todo/views/tasks/task_view.dart';
 import 'package:iconsax/iconsax.dart';
 

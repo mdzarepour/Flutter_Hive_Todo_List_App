@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_todo/core/utils/dialog_messages.dart';
 import 'package:iconsax/iconsax.dart';
 
 class HomeViewAppbarState extends StatelessWidget
@@ -20,7 +21,14 @@ class HomeViewAppbarState extends StatelessWidget
           },
           child: Icon(size: 30, color: scheme.onSurface, Iconsax.menu_1),
         ),
-        actions: const [Icon(Iconsax.trash)],
+        actions: [
+          InkWell(
+            onTap: () {
+              taskDeletingDialog(context);
+            },
+            child: const Icon(Iconsax.trash),
+          ),
+        ],
       ),
     );
   }
