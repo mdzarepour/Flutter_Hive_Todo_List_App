@@ -9,8 +9,14 @@ import 'package:hive_todo/views/tasks/widgets/task_view_inputWidget.dart';
 import 'package:hive_todo/views/tasks/widgets/task_view_time_picker.dart';
 import 'package:iconsax/iconsax.dart';
 
-class TaskView extends StatelessWidget {
-  TaskView({super.key});
+class TaskView extends StatefulWidget {
+  const TaskView({super.key});
+
+  @override
+  State<TaskView> createState() => _TaskViewState();
+}
+
+class _TaskViewState extends State<TaskView> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptiomController = TextEditingController();
 

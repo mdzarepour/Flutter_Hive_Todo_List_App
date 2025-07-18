@@ -2,12 +2,14 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_todo/core/constants/app_strings.dart';
 import 'package:hive_todo/extentions/space_exs.dart';
+import 'package:hive_todo/models/task_model.dart';
 import 'package:hive_todo/views/home/components/home_view_appbar.dart';
 import 'package:hive_todo/views/home/components/home_view_drawer.dart';
 import 'package:hive_todo/views/home/components/home_view_fab.dart';
 import 'package:hive_todo/views/home/widgets/home_view_task_widget.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
+import 'package:uuid/uuid.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -111,7 +113,16 @@ class _HomeViewState extends State<HomeView> {
                         },
                         direction: DismissDirection.horizontal,
                         key: Key(list[index].toString()),
-                        child: const HomeViewTaskWidget(),
+                        child: HomeViewTaskWidget(
+                          task: TaskModel(
+                            id: const Uuid().v4(),
+                            createdAtTime: DateTime.now(),
+                            createdAtDate: DateTime.now(),
+                            description: 'We have go to gym',
+                            title: 'dont forgot tickets',
+                            isCompleted: true,
+                          ),
+                        ),
                       );
                     },
                   ),

@@ -24,7 +24,7 @@ class HomeViewAppbarState extends StatelessWidget
         actions: [
           InkWell(
             onTap: () {
-              taskDeletingDialog(context);
+              showEmptyTaskListWarningDialog(context);
             },
             child: const Icon(Iconsax.trash),
           ),

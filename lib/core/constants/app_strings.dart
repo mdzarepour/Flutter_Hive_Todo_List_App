@@ -18,7 +18,7 @@ class AppStrings {
   static const String drawerSetting = 'Setting';
   static const String drawerShare = 'Share';
   static const String dialogEmptyTask = 'dont have any task to delete !';
-  static const String dialogOops = 'Oops';
+  static const String dialogOops = 'Oops !';
   static const String dialogOk = 'Ok';
   static const String dialogDeteleTask = 'We Gonna Delete This Task';
   static const String dialogAreSure = 'Are You Sure ?';

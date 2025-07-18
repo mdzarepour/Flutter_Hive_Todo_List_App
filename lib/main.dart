@@ -8,15 +8,15 @@ import 'package:hive_todo/views/home/home_view.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TaskModelAdapter());
-  await Hive.openBox<TaskModel>('taskBox');
+  await Hive.openBox<TaskModel>(HiveData.boxName);
   runApp(BaseWidget(child: const Application()));
 }
 
 class BaseWidget extends InheritedWidget {
-  final HiveData hiveData = HiveData();
-
-  final Widget child;
   BaseWidget({super.key, required this.child}) : super(child: child);
+  final HiveData hiveData = HiveData();
+  @override
+  final Widget child;
 
   static BaseWidget of(BuildContext context) {
     final base = context.dependOnInheritedWidgetOfExactType<BaseWidget>();
@@ -28,9 +28,7 @@ class BaseWidget extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
-    return false;
-  }
+  bool updateShouldNotify(covariant InheritedWidget oldWidget) => false;
 }
 
 class Application extends StatelessWidget {
@@ -38,6 +36,8 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(BaseWidget.of(context).hiveData.taskBox.values.length);
+    print('hive content ==>');
     return MaterialApp(
       theme: AppTheme.appThem,
       debugShowCheckedModeBanner: false,

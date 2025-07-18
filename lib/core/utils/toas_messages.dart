@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:ftoast/ftoast.dart';
-import 'package:hive_todo/core/constants/app_colors.dart';
 import 'package:hive_todo/core/constants/app_strings.dart';
 import 'package:hive_todo/core/theme/app_text_theme.dart';
 

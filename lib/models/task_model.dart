@@ -15,7 +15,7 @@ class TaskModel extends HiveObject {
   @HiveField(4)
   final String title;
   @HiveField(5)
-  final bool isCompleted;
+  bool isCompleted;
 
   TaskModel({
     required this.id,

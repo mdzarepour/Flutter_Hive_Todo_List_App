@@ -1,43 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:hive_todo/core/constants/app_colors.dart';
 import 'package:hive_todo/core/constants/app_strings.dart';
-import 'package:hive_todo/main.dart';
-import 'package:panara_dialogs/panara_dialogs.dart';
+import 'package:hive_todo/extentions/space_exs.dart';
 
-dynamic emptyTaskListWarningDialog(BuildContext context) {
-  return PanaraInfoDialog.showAnimatedFade(
-    context,
-    message: AppStrings.dialogEmptyTask,
-    title: AppStrings.dialogOops,
-    buttonText: AppStrings.dialogOk,
-    onTapDismiss: () {
-      // BaseWidget.of(context).hiveData.taskBox.clear();
-      Navigator.of(context).pop();
+dynamic showEmptyTaskListWarningDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(10),
+        ),
+        title: const Text(AppStrings.dialogOops),
+        content: const Text(
+          style: TextStyle(color: AppColors.materialWhite),
+          AppStrings.dialogDeteleTask,
+        ),
+        actions: [
+          10.h,
+          Center(
+            child: SizedBox(
+              width: 200,
+              child: FilledButton(
+                onPressed: () {},
+                child: const Text(AppStrings.dialogOk),
+              ),
+            ),
+          ),
+          20.w,
+        ],
+      );
     },
-    panaraDialogType: PanaraDialogType.custom,
-    color: const Color.fromARGB(150, 255, 255, 255),
-    textColor: const Color.fromARGB(150, 255, 255, 255),
-    buttonTextColor: AppColors.materialBlack,
   );
 }
 
-dynamic taskDeletingDialog(BuildContext context) {
-  return PanaraConfirmDialog.showAnimatedFade(
-    context,
-    message: AppStrings.dialogDeteleTask,
-    title: AppStrings.dialogAreSure,
-    panaraDialogType: PanaraDialogType.custom,
-    color: const Color.fromARGB(150, 255, 255, 255),
-    textColor: const Color.fromARGB(150, 255, 255, 255),
-    buttonTextColor: AppColors.materialFirstBlue,
-    confirmButtonText: AppStrings.dialogDelete,
-    cancelButtonText: AppStrings.dialogCancle,
-    onTapConfirm: () {
-      print('task deleted test');
-      Navigator.pop(context);
-    },
-    onTapCancel: () {
-      Navigator.pop(context);
+dynamic showTaskDeletingDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(10),
+        ),
+        title: const Text(AppStrings.dialogAreSure),
+        content: const Text(
+          style: TextStyle(color: AppColors.materialWhite),
+          AppStrings.dialogDeteleTask,
+        ),
+        actions: [
+          10.h,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FilledButton(
+                onPressed: () {},
+                child: const Text(AppStrings.dialogDelete),
+              ),
+              20.w,
+              FilledButton(
+                onPressed: () {},
+                child: const Text(AppStrings.dialogCancle),
+              ),
+            ],
+          ),
+        ],
+      );
     },
   );
 }
