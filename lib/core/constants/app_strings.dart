@@ -4,6 +4,7 @@ class AppStrings {
   static const String taskViewTitle = 'title';
   static const String taskViewDescription = 'description';
   static const String taskViewAddOne = 'Add New ';
+  static const String taskViewUpdate = 'Update';
   static const String taskViewAddTwo = 'Task';
   static const String taskViewTime = 'Time';
   static const String taskViewDate = 'Date';
@@ -24,10 +25,12 @@ class AppStrings {
   static const String dialogEmptyTask = 'dont have any task to delete';
   static const String dialogOops = 'Oops !';
   static const String dialogOk = 'Ok';
-  static const String dialogDeteleTask = 'We Gonna Delete This Task';
+  static const String dialogDeteleTask = 'We Gonna Delete All Task';
   static const String dialogAreSure = 'Are You Sure ?';
   static const String dialogDelete = 'Yes Delete';
   static const String dialogCancle = 'Cancl';
   static const String toastPleaseEdit = 'please edit task then try again';
   static const String toastPleaseInsert = 'please insert all fields first';
+  static const String timeFormatter = 'hh : mm : ss a';
+  static const String dateFormatter = 'yyyy-MM-dd';
 }

@@ -64,9 +64,7 @@ dynamic showTaskDeletingDialog(BuildContext context) {
               ),
               20.w,
               FilledButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                onPressed: () => Navigator.pop(context),
                 child: const Text(AppStrings.dialogCancle),
               ),
             ],

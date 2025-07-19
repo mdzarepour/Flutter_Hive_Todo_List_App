@@ -7,14 +7,7 @@ import 'package:hive_todo/core/theme/app_text_theme.dart';
 class AppTheme {
   AppTheme._();
   static ThemeData appThem = ThemeData(
-    filledButtonTheme: FilledButtonThemeData(
-      style: FilledButton.styleFrom(
-        fixedSize: const Size.fromHeight(60),
-        backgroundColor: AppColors.materialThirdBlue,
-        textStyle: AppTextTheme.appTextTheme.bodyMedium,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-    ),
+    filledButtonTheme: _getFilledButton(),
     floatingActionButtonTheme: _getFloatinButtonTheme(),
     textTheme: AppTextTheme.appTextTheme,
     inputDecorationTheme: _getInpuTheme(),
@@ -22,6 +15,17 @@ class AppTheme {
     dividerTheme: _getDividerTheme(),
     colorScheme: _getColorScheme(),
   );
+
+  static FilledButtonThemeData _getFilledButton() {
+    return FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        fixedSize: const Size.fromHeight(60),
+        backgroundColor: AppColors.materialThirdBlue,
+        textStyle: AppTextTheme.appTextTheme.bodyMedium,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    );
+  }
 
   static FloatingActionButtonThemeData _getFloatinButtonTheme() {
     return FloatingActionButtonThemeData(

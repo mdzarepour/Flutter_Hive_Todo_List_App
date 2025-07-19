@@ -14,15 +14,3 @@ dynamic addingTaskEmptyFieldsWarning(BuildContext context) {
     msgStyle: AppTextTheme.appTextTheme.headlineMedium,
   );
 }
-
-dynamic updatingTaskEmptyFieldsWarning(BuildContext context) {
-  return FToast.toast(
-    context,
-    corner: 12,
-    color: const Color.fromARGB(255, 35, 35, 38),
-    msg: AppStrings.dialogOops,
-    subMsg: AppStrings.toastPleaseEdit,
-    duration: 2000,
-    msgStyle: AppTextTheme.appTextTheme.headlineMedium,
-  );
-}

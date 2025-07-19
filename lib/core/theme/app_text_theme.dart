@@ -7,44 +7,37 @@ class AppTextTheme {
   static TextTheme appTextTheme = TextTheme(
     headlineLarge: GoogleFonts.poppins(
       fontSize: 30,
-      color: AppColors
-          .materialWhite, // Changed to white for better contrast on dark backgrounds
+      color: AppColors.materialWhite,
       fontWeight: FontWeight.w900,
     ),
     headlineMedium: GoogleFonts.dmSans(
       fontSize: 17,
-      color: AppColors
-          .materialWhite, // Changed to white for better contrast on dark backgrounds
+      color: AppColors.materialWhite,
       fontWeight: FontWeight.w400,
     ),
     titleLarge: GoogleFonts.dmSans(
       fontSize: 15,
-      color: AppColors
-          .materialWhite, // Changed to white for better contrast on dark backgrounds
+      color: AppColors.materialWhite,
       fontWeight: FontWeight.w700,
     ),
     titleMedium: GoogleFonts.dmSans(
       fontSize: 15,
-      color:
-          AppColors.materialGrey, // Using the new grey for less prominent text
+      color: AppColors.materialGrey,
       fontWeight: FontWeight.w400,
     ),
     titleSmall: GoogleFonts.dmSans(
       fontSize: 12,
-      color: AppColors
-          .materialPink, // Using the new pink as an accent for small titles
+      color: AppColors.materialPink,
       fontWeight: FontWeight.w700,
     ),
     bodyLarge: GoogleFonts.poppins(
       fontSize: 45,
-      color: AppColors
-          .materialWhite, // Changed to white for better contrast on dark backgrounds
+      color: AppColors.materialWhite,
       fontWeight: FontWeight.w700,
     ),
     bodyMedium: GoogleFonts.poppins(
       fontSize: 17,
-      color: AppColors
-          .materialBlack, // Changed to white for better contrast on dark backgrounds
+      color: AppColors.materialBlack,
       fontWeight: FontWeight.w400,
     ),
   );

@@ -37,5 +37,7 @@ class HiveData {
     await taskBox.clear();
   }
 
-  ValueListenable<Box<TaskModel>> listenToBox() => taskBox.listenable();
+  ValueListenable<Box<TaskModel>> listenToBox() {
+    return taskBox.listenable();
+  }
 }

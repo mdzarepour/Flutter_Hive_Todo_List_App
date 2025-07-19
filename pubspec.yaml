@@ -32,7 +32,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_cupertino_date_picker_fork: ^1.0.7
-  flutter_slider_drawer: ^3.0.2
   ftoast: ^2.0.0
   google_fonts: ^6.2.1
   hive: ^2.2.3
@@ -41,7 +40,6 @@ dependencies:
   iconsax: ^0.0.8
   intl: ^0.20.2
   lottie: ^3.3.1
-  panara_dialogs: ^0.1.5
   uuid: ^4.5.1
 
 
