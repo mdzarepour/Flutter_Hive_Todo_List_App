@@ -52,15 +52,11 @@ used package in MovieApp :
 
 *  Uuid :  `uuid: ^4.5.1`
 *  Flutter Lottie :  `lottie: ^3.3.1`
-*  Intl :  `intl: ^0.20.2`
 *  IconSax :  `iconsax: ^0.0.8`
 *  Hive Generator :  `hive_generator: ^2.0.1`
 *  Flutter Hive :  `hive_flutter: ^1.1.0`
 *  Hive :  `hive: ^2.2.3`
 *  Google Fonts :  `google_fonts: ^6.2.1`
-*  Flutter Hive :  `hive_flutter: ^1.1.0`
-*  Flutter Toast :  `ftoast: ^2.0.0`
 *  Flutter Cupertino Date Picker Fork :  `flutter_cupertino_date_picker_fork: ^1.0.7`
-*  Build Runner :  `flutter_lints: ^3.0.2`
 
 
