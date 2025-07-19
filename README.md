@@ -1,16 +1,65 @@
-# hive_todo
+# Hive Todo List
 
-A new Flutter project.
+Hive Todo is a small-scale application designed to learn how to implement CRUD operations on local data using the Hive database
+<br>
+<br>
 
-## Getting Started
+<p align="left">
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img width="200"  alt="Screenshot_1752949096" src="https://github.com/user-attachments/assets/81cb8503-6ec8-4c54-9c8d-585041c674bb" />
+<img width="200"  alt="Screenshot_1752949100" src="https://github.com/user-attachments/assets/e68b453f-78d9-4500-a8db-0de1d44a19f5" />
+<img width="200"  alt="Screenshot_1752949334" src="https://github.com/user-attachments/assets/31a85f6f-a37c-4f22-b479-19da61171796" />
+<img width="200"  alt="Screenshot_1752949302" src="https://github.com/user-attachments/assets/0f76de97-4750-4861-ac52-f609957cc3ba" />
+<img width="200"  alt="Screenshot_1752949325" src="https://github.com/user-attachments/assets/9572c766-dfaf-4b5b-a82b-a8b767546075" />
+  <img width="200"  alt="Screenshot_1752949404" src="https://github.com/user-attachments/assets/57451519-5b33-4943-9732-ca8eb960af47" />
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+
+
+
+
+
+
+
+</p>
+
+
+## how to test ?
+
+add remote or download source then :
+
+
+```bash
+flutter pub get
+```
+```bash
+flutter pub upgrade
+```
+```bash
+flutter run
+```
+
+<hr>
+
+used package in MovieApp :
+
+
+
+*  Uuid :  `uuid: ^4.5.1`
+*  Flutter Lottie :  `lottie: ^3.3.1`
+*  Intl :  `intl: ^0.20.2`
+*  IconSax :  `iconsax: ^0.0.8`
+*  Hive Generator :  `hive_generator: ^2.0.1`
+*  Flutter Hive :  `hive_flutter: ^1.1.0`
+*  Hive :  `hive: ^2.2.3`
+*  Google Fonts :  `google_fonts: ^6.2.1`
+*  Flutter Hive :  `hive_flutter: ^1.1.0`
+*  Flutter Toast :  `ftoast: ^2.0.0`
+*  Flutter Cupertino Date Picker Fork :  `flutter_cupertino_date_picker_fork: ^1.0.7`
+*  Build Runner :  `flutter_lints: ^3.0.2`
+
+
