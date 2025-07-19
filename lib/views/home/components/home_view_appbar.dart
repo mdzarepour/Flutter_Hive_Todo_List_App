@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_todo/core/utils/dialog_messages.dart';
+import 'package:hive_todo/data/hive_data.dart';
 import 'package:iconsax/iconsax.dart';
 
-class HomeViewAppbarState extends StatelessWidget
-    implements PreferredSizeWidget {
-  const HomeViewAppbarState({super.key});
+class HomeViewAppbar extends StatelessWidget implements PreferredSizeWidget {
+  final HiveData hiveDate;
+  const HomeViewAppbar({super.key, required this.hiveDate});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,11 @@ class HomeViewAppbarState extends StatelessWidget
         actions: [
           InkWell(
             onTap: () {
-              showEmptyTaskListWarningDialog(context);
+              if (hiveDate.taskBox.isEmpty) {
+                showEmptyTaskListWarningDialog(context);
+              } else {
+                showTaskDeletingDialog(context);
+              }
             },
             child: const Icon(Iconsax.trash),
           ),

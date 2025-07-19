@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:hive_todo/core/constants/app_strings.dart';
 
-class TaskViewTimePicker extends StatelessWidget {
-  const TaskViewTimePicker({
+class TaskViewDateTimePicker extends StatelessWidget {
+  const TaskViewDateTimePicker({
     super.key,
-    required this.openWidget,
+
     required this.pickerWidget,
+    required this.buttonTitle,
+    required this.title,
   });
-  final void Function() openWidget;
   final Widget pickerWidget;
+  final String buttonTitle;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class TaskViewTimePicker extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(style: textTheme.headlineMedium, AppStrings.taskViewTime),
+          Text(style: textTheme.headlineMedium, title),
           InkWell(
             onTap: () => _showPickerWidget(context),
             child: Container(
@@ -40,7 +42,7 @@ class TaskViewTimePicker extends StatelessWidget {
                   style: textTheme.headlineMedium!.copyWith(
                     color: Colors.white,
                   ),
-                  AppStrings.taskViewSelectTime,
+                  buttonTitle,
                 ),
               ),
             ),

@@ -1,10 +1,14 @@
 class AppStrings {
   AppStrings._();
   static const String taskViewHeader = 'hmm its seems you want do something..';
+  static const String taskViewTitle = 'title';
+  static const String taskViewDescription = 'description';
   static const String taskViewAddOne = 'Add New ';
   static const String taskViewAddTwo = 'Task';
   static const String taskViewTime = 'Time';
+  static const String taskViewDate = 'Date';
   static const String taskViewSelectTime = 'Select Time';
+  static const String taskViewSelectDate = 'Select Date';
   static const String taskViewAddTask = 'Add Task';
   static const String taskViewDeleteTask = 'Delete Task';
   static const String taskViewInputOne = 'what are you planing ?';
@@ -17,7 +21,7 @@ class AppStrings {
   static const String drawerHome = 'Home';
   static const String drawerSetting = 'Setting';
   static const String drawerShare = 'Share';
-  static const String dialogEmptyTask = 'dont have any task to delete !';
+  static const String dialogEmptyTask = 'dont have any task to delete';
   static const String dialogOops = 'Oops !';
   static const String dialogOk = 'Ok';
   static const String dialogDeteleTask = 'We Gonna Delete This Task';

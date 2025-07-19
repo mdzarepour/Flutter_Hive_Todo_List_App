@@ -26,14 +26,19 @@ class TaskModel extends HiveObject {
     required this.isCompleted,
   });
 
-  factory TaskModel.createNewTask(TaskModel task) {
+  factory TaskModel.createNewTask({
+    required DateTime time,
+    required DateTime date,
+    required String title,
+    required String description,
+  }) {
     const Uuid uuid = Uuid();
     return TaskModel(
       id: uuid.v1(),
-      createdAtTime: task.createdAtTime,
-      createdAtDate: task.createdAtDate,
-      description: task.description,
-      title: task.title,
+      createdAtTime: time,
+      createdAtDate: date,
+      description: description,
+      title: title,
       isCompleted: false,
     );
   }

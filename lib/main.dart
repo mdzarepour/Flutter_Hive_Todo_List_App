@@ -36,8 +36,6 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(BaseWidget.of(context).hiveData.taskBox.values.length);
-    print('hive content ==>');
     return MaterialApp(
       theme: AppTheme.appThem,
       debugShowCheckedModeBanner: false,

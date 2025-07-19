@@ -25,8 +25,6 @@ class TaskViewInputWidget extends StatelessWidget {
         hintText: hint,
         prefixIcon: isDescription ? null : const Icon(Iconsax.archive_1),
       ),
-      onFieldSubmitted: (value) {},
-      onChanged: (value) {},
     );
   }
 }

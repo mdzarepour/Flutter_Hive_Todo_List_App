@@ -1,0 +1,1 @@
+enum TaskViewTypeEnum { update, create }

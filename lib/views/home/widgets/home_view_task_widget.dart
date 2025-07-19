@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_todo/extentions/space_exs.dart';
 import 'package:hive_todo/models/task_model.dart';
@@ -17,60 +18,81 @@ class _HomeViewTaskWidgetState extends State<HomeViewTaskWidget> {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
     return GestureDetector(
-      child: AnimatedContainer(
-        height: 100,
-        duration: const Duration(milliseconds: 600),
-        margin: const EdgeInsets.only(bottom: 15),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: scheme.secondary,
-        ),
-        child: Padding(
-          padding: const EdgeInsetsGeometry.only(left: 10, right: 20),
+      child: FadeInUp(
+        from: 25,
+        child: Container(
+          height: 100,
+          margin: const EdgeInsets.only(bottom: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: scheme.secondary,
+          ),
           child: Row(
             children: [
-              Transform.scale(
-                scale: 1.5,
-                child: Checkbox(
-                  activeColor: scheme.secondary,
-                  value: widget.task.isCompleted,
-                  onChanged: (value) {
-                    setState(() {
-                      widget.task.isCompleted = value!;
-                    });
-                  },
+              Expanded(
+                flex: 1,
+                child: Transform.scale(
+                  scale: 1.5,
+                  child: Checkbox(
+                    activeColor: scheme.secondary,
+                    value: widget.task.isCompleted,
+                    onChanged: (value) {
+                      setState(() {
+                        widget.task.isCompleted = value!;
+                        widget.task.save();
+                      });
+                    },
+                  ),
                 ),
               ),
               20.w,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    style: textTheme.headlineMedium!.copyWith(
-                      decoration: widget.task.isCompleted
-                          ? TextDecoration.lineThrough
-                          : null,
+              Expanded(
+                flex: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      child: Text(
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: textTheme.headlineMedium!.copyWith(
+                          decoration: widget.task.isCompleted
+                              ? TextDecoration.lineThrough
+                              : null,
+                        ),
+                        widget.task.title,
+                      ),
                     ),
-                    widget.task.title,
-                  ),
-                  Text(style: textTheme.titleMedium, widget.task.description),
-                ],
+                    Text(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: textTheme.titleMedium,
+                      widget.task.description,
+                    ),
+                  ],
+                ),
               ),
-              const Spacer(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    style: textTheme.headlineMedium,
-                    DateFormat('yyyy-MM-dd').format(widget.task.createdAtDate),
-                  ),
-                  Text(
-                    style: textTheme.titleMedium,
-                    DateFormat('HH:mm:ss').format(widget.task.createdAtTime),
-                  ),
-                ],
+              10.w,
+              Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      style: textTheme.headlineMedium,
+                      DateFormat(
+                        'yyyy-MM-dd',
+                      ).format(widget.task.createdAtDate),
+                    ),
+                    Text(
+                      style: textTheme.titleMedium,
+                      DateFormat('HH:mm:ss').format(widget.task.createdAtTime),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

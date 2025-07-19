@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_todo/core/constants/app_colors.dart';
 import 'package:hive_todo/core/constants/app_strings.dart';
 import 'package:hive_todo/extentions/space_exs.dart';
+import 'package:hive_todo/main.dart';
 
 dynamic showEmptyTaskListWarningDialog(BuildContext context) {
   showDialog(
@@ -14,7 +15,7 @@ dynamic showEmptyTaskListWarningDialog(BuildContext context) {
         title: const Text(AppStrings.dialogOops),
         content: const Text(
           style: TextStyle(color: AppColors.materialWhite),
-          AppStrings.dialogDeteleTask,
+          AppStrings.dialogEmptyTask,
         ),
         actions: [
           10.h,
@@ -22,7 +23,9 @@ dynamic showEmptyTaskListWarningDialog(BuildContext context) {
             child: SizedBox(
               width: 200,
               child: FilledButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 child: const Text(AppStrings.dialogOk),
               ),
             ),
@@ -53,12 +56,17 @@ dynamic showTaskDeletingDialog(BuildContext context) {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FilledButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await BaseWidget.of(context).hiveData.deleteAllTask();
+                  Navigator.pop(context);
+                },
                 child: const Text(AppStrings.dialogDelete),
               ),
               20.w,
               FilledButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 child: const Text(AppStrings.dialogCancle),
               ),
             ],
