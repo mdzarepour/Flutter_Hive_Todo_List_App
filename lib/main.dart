@@ -1,34 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_todo/core/constants/app_strings.dart';
 import 'package:hive_todo/core/theme/app_theme.dart';
 import 'package:hive_todo/data/hive_data.dart';
 import 'package:hive_todo/models/task_model.dart';
 import 'package:hive_todo/views/home/home_view.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(TaskModelAdapter());
   await Hive.openBox<TaskModel>(HiveData.boxName);
-  runApp(BaseWidget(child: const Application()));
-}
-
-class BaseWidget extends InheritedWidget {
-  BaseWidget({super.key, required this.child}) : super(child: child);
-  final HiveData hiveData = HiveData();
-  @override
-  final Widget child;
-
-  static BaseWidget of(BuildContext context) {
-    final base = context.dependOnInheritedWidgetOfExactType<BaseWidget>();
-    if (base != null) {
-      return base;
-    } else {
-      throw StateError('could not found encestor widget of type BaseWidget');
-    }
-  }
-
-  @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) => false;
+  runApp(BaseWidget(hiveData: HiveData(), child: const Application()));
 }
 
 class Application extends StatelessWidget {
@@ -42,4 +25,20 @@ class Application extends StatelessWidget {
       home: const HomeView(),
     );
   }
+}
+
+class BaseWidget extends InheritedWidget {
+  final HiveData hiveData;
+  const BaseWidget({super.key, required this.hiveData, required super.child});
+
+  static BaseWidget of(BuildContext context) {
+    final base = context.dependOnInheritedWidgetOfExactType<BaseWidget>();
+    if (base == null) {
+      throw StateError(AppStrings.baseWidgetError);
+    }
+    return base;
+  }
+
+  @override
+  bool updateShouldNotify(covariant InheritedWidget oldWidget) => false;
 }

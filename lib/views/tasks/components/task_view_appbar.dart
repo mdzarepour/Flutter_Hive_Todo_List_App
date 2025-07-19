@@ -9,9 +9,7 @@ class TaskViewAppbar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       automaticallyImplyLeading: false,
       title: InkWell(
-        onTap: () {
-          Navigator.pop(context);
-        },
+        onTap: () => Navigator.pop(context),
         child: const Icon(Iconsax.arrow_left),
       ),
     );

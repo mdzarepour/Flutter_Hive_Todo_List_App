@@ -8,6 +8,7 @@ class AppTheme {
   AppTheme._();
   static ThemeData appThem = ThemeData(
     filledButtonTheme: _getFilledButton(),
+
     floatingActionButtonTheme: _getFloatinButtonTheme(),
     textTheme: AppTextTheme.appTextTheme,
     inputDecorationTheme: _getInpuTheme(),

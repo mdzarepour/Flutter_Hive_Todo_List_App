@@ -19,124 +19,127 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  late HiveData hiveData;
+  late HiveData _hiveData;
 
   @override
   Widget build(BuildContext context) {
-    hiveData = BaseWidget.of(context).hiveData;
-    final ColorScheme scheme = Theme.of(context).colorScheme;
+    _hiveData = BaseWidget.of(context).hiveData;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
-      appBar: HomeViewAppbar(hiveDate: hiveData),
+      appBar: HomeViewAppbar(hiveDate: _hiveData),
       drawer: const HomeViewDrawer(),
-      body: _buildHomeViewBody(scheme, textTheme),
+      body: _buildHomeViewBody(colorScheme, textTheme),
       floatingActionButton: const HomeViewFab(),
     );
   }
 
-  SafeArea _buildHomeViewBody(ColorScheme scheme, TextTheme textTheme) {
+  SafeArea _buildHomeViewBody(ColorScheme colorScheme, TextTheme textTheme) {
     return SafeArea(
       child: ValueListenableBuilder(
-        valueListenable: hiveData.listenToBox(),
+        valueListenable: _hiveData.listenToBox(),
         builder: (context, value, child) {
-          final List<int> taskListStats = hiveData.readTaskListStats();
+          final List<int> taskListStats = _hiveData.readTaskListStats();
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.max,
             children: [
               20.h,
-              // header -->
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(
-                    value: hiveData.taskBox.length == 0
-                        ? null
-                        : taskListStats[0] / taskListStats[1],
-                    backgroundColor: scheme.primaryContainer,
-                    valueColor: AlwaysStoppedAnimation(scheme.onSurface),
-                  ),
-                  30.w,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        style: textTheme.headlineLarge,
-                        AppStrings.homeViewMyTasks,
-                      ),
-                      10.h,
-                      Text(
-                        style: textTheme.titleMedium,
-                        '${taskListStats[0]} of ${taskListStats[1]}',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              _buildHeader(taskListStats, colorScheme, textTheme),
               10.h,
               const Divider(),
               30.h,
-              // tasks listview -->
               Expanded(
-                child: hiveData.taskBox.isEmpty
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FadeInUp(
-                            from: 30,
-                            child: LottieBuilder.asset(
-                              animate: hiveData.taskBox.isEmpty ? true : false,
-                              height: 200,
-                              AppStrings.homeViewEmptyJson,
-                            ),
-                          ),
-                          FadeInUp(
-                            from: 30,
-                            child: Text(
-                              style: textTheme.headlineMedium,
-                              AppStrings.homeViewEmpty,
-                            ),
-                          ),
-                        ],
-                      )
-                    : ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        itemCount: hiveData.taskBox.values.length,
-                        itemBuilder: (context, index) {
-                          final taskList = hiveData.taskBox.values.toList();
-                          return Dismissible(
-                            background: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              spacing: 10,
-                              children: [
-                                Icon(
-                                  Iconsax.trash,
-                                  color: scheme.primaryContainer,
-                                ),
-                                Text(
-                                  style: textTheme.titleMedium,
-                                  AppStrings.homeViewDelete,
-                                ),
-                              ],
-                            ),
-                            onDismissed: (_) {
-                              setState(() {
-                                hiveData.deleteTask(task: taskList[index]);
-                              });
-                            },
-                            direction: DismissDirection.horizontal,
-                            key: Key(taskList[index].id),
-                            child: HomeViewTaskWidget(task: taskList[index]),
-                          );
-                        },
-                      ),
+                child: _hiveData.taskBox.isEmpty
+                    ? _buildEmptyStateWidget(textTheme)
+                    : _buildTaskListView(colorScheme, textTheme),
               ),
             ],
           );
         },
       ),
+    );
+  }
+
+  ListView _buildTaskListView(ColorScheme colorScheme, TextTheme textTheme) {
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      itemCount: _hiveData.taskBox.values.length,
+      itemBuilder: (context, index) {
+        final taskList = _hiveData.taskBox.values.toList();
+        return Dismissible(
+          background: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Iconsax.trash, color: colorScheme.primaryContainer),
+              10.w,
+              Text(AppStrings.homeViewDelete, style: textTheme.titleMedium),
+            ],
+          ),
+          onDismissed: (_) => _hiveData.deleteTask(task: taskList[index]),
+          direction: DismissDirection.horizontal,
+          key: Key(taskList[index].id),
+          child: HomeViewTaskWidget(task: taskList[index]),
+        );
+      },
+    );
+  }
+
+  Column _buildEmptyStateWidget(TextTheme textTheme) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        FadeInUp(
+          from: 30,
+          child: LottieBuilder.asset(
+            animate: _hiveData.taskBox.isEmpty,
+            height: 200,
+            AppStrings.homeViewEmptyJson,
+          ),
+        ),
+        FadeInUp(
+          from: 30,
+          child: Text(
+            AppStrings.homeViewEmpty,
+            style: textTheme.headlineMedium,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row _buildHeader(
+    List taskListStats,
+    ColorScheme scheme,
+    TextTheme textTheme,
+  ) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CircularProgressIndicator(
+          value: _hiveData.taskBox.isEmpty
+              ? null
+              : taskListStats[0] / taskListStats[1],
+          backgroundColor: scheme.primaryContainer,
+          valueColor: AlwaysStoppedAnimation(scheme.onSurface),
+        ),
+        30.w,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(AppStrings.homeViewMyTasks, style: textTheme.headlineLarge),
+            10.h,
+            Text(
+              '${taskListStats[0]} of ${taskListStats[1]}',
+              style: textTheme.titleMedium,
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

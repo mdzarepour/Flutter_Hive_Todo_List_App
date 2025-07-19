@@ -33,4 +33,6 @@ class AppStrings {
   static const String toastPleaseInsert = 'please insert all fields first';
   static const String timeFormatter = 'hh : mm : ss a';
   static const String dateFormatter = 'yyyy-MM-dd';
+  static const String baseWidgetError =
+      'BaseWidget not found in the widget tree. Make sure to wrap your app with BaseWidget.';
 }

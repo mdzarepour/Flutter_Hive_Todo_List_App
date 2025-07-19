@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_todo/core/constants/app_strings.dart';
 import 'package:hive_todo/extentions/space_exs.dart';
 import 'package:hive_todo/models/task_model.dart';
 import 'package:hive_todo/models/task_view_type_enum.dart';
@@ -18,7 +19,7 @@ class HomeViewTaskWidget extends StatefulWidget {
 class _HomeViewTaskWidgetState extends State<HomeViewTaskWidget> {
   @override
   Widget build(BuildContext context) {
-    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
     return GestureDetector(
       onTap: () {
@@ -37,7 +38,7 @@ class _HomeViewTaskWidgetState extends State<HomeViewTaskWidget> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: scheme.secondary,
+            color: colorScheme.secondary,
           ),
           child: Row(
             children: [
@@ -46,7 +47,7 @@ class _HomeViewTaskWidgetState extends State<HomeViewTaskWidget> {
                 child: Transform.scale(
                   scale: 1.5,
                   child: Checkbox(
-                    activeColor: scheme.secondary,
+                    activeColor: colorScheme.secondary,
                     value: widget.task.isCompleted,
                     onChanged: (value) {
                       setState(() {
@@ -95,12 +96,14 @@ class _HomeViewTaskWidgetState extends State<HomeViewTaskWidget> {
                     Text(
                       style: textTheme.headlineMedium,
                       DateFormat(
-                        'yyyy-MM-dd',
+                        AppStrings.dateFormatter,
                       ).format(widget.task.createdAtDate),
                     ),
                     Text(
                       style: textTheme.titleMedium,
-                      DateFormat('HH:mm:ss').format(widget.task.createdAtTime),
+                      DateFormat(
+                        AppStrings.timeFormatter,
+                      ).format(widget.task.createdAtTime),
                     ),
                   ],
                 ),

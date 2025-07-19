@@ -30,8 +30,6 @@ class _TaskViewState extends State<TaskView> {
   late DateTime _selectedTime;
   late DateTime _selectedDate;
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   late HiveData _hiveData;
 
   @override
@@ -66,57 +64,61 @@ class _TaskViewState extends State<TaskView> {
         appBar: const TaskViewAppbar(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                _buildHeader(textTheme),
-                Text(
-                  AppStrings.taskViewHeader,
-                  textAlign: TextAlign.center,
-                  style: textTheme.headlineMedium,
+          child: Column(
+            children: [
+              _buildHeader(textTheme),
+              Text(
+                AppStrings.taskViewHeader,
+                textAlign: TextAlign.center,
+                style: textTheme.headlineMedium,
+              ),
+              40.h,
+              // title input -->
+              TaskViewInputWidget(
+                isDescription: false,
+                hint: AppStrings.taskViewInputOne,
+                controller: _titleController,
+              ),
+              25.h,
+              // description input -->
+              TaskViewInputWidget(
+                isDescription: true,
+                controller: _descriptionController,
+                hint: AppStrings.taskViewInputTwo,
+              ),
+              50.h,
+              // date picker -->
+              TaskViewDateTimePicker(
+                buttonTitle: DateFormat(
+                  AppStrings.dateFormatter,
+                ).format(_selectedDate),
+                title: AppStrings.taskViewDate,
+                pickerWidget: DatePickerWidget(
+                  pickerTheme: AppTheme.timeDatePickerTheme,
+                  onMonthChangeStartWithFirstDate: true,
+                  initialDateTime: _selectedDate,
+                  onChange: (dateTime, indexes) {
+                    setState(() => _selectedDate = dateTime);
+                  },
                 ),
-                40.h,
-                TaskViewInputWidget(
-                  hint: AppStrings.taskViewInputOne,
-                  controller: _titleController,
+              ),
+              25.h,
+              // time picker -->
+              TaskViewDateTimePicker(
+                buttonTitle: DateFormat(
+                  AppStrings.timeFormatter,
+                ).format(_selectedTime),
+                title: AppStrings.taskViewTime,
+                pickerWidget: TimePickerWidget(
+                  pickerTheme: AppTheme.timeDatePickerTheme,
+                  initDateTime: _selectedTime,
+                  onChange: (dateTime, _) =>
+                      setState(() => _selectedTime = dateTime),
                 ),
-                25.h,
-                TaskViewInputWidget(
-                  controller: _descriptionController,
-                  hint: AppStrings.taskViewInputTwo,
-                ),
-                50.h,
-                TaskViewDateTimePicker(
-                  buttonTitle: DateFormat(
-                    AppStrings.dateFormatter,
-                  ).format(_selectedDate),
-                  title: AppStrings.taskViewDate,
-                  pickerWidget: DatePickerWidget(
-                    pickerTheme: AppTheme.timeDatePickerTheme,
-                    onMonthChangeStartWithFirstDate: true,
-                    initialDateTime: _selectedDate,
-                    onChange: (dateTime, _) =>
-                        setState(() => _selectedDate = dateTime),
-                  ),
-                ),
-                25.h,
-                TaskViewDateTimePicker(
-                  buttonTitle: DateFormat(
-                    AppStrings.timeFormatter,
-                  ).format(_selectedTime),
-                  title: AppStrings.taskViewTime,
-                  pickerWidget: TimePickerWidget(
-                    pickerTheme: AppTheme.timeDatePickerTheme,
-                    initDateTime: _selectedTime,
-                    onChange: (dateTime, _) =>
-                        setState(() => _selectedTime = dateTime),
-                  ),
-                ),
-                50.h,
-                _buildActionButtons(),
-              ],
-            ),
+              ),
+              50.h,
+              _buildActionButtons(),
+            ],
           ),
         ),
       ),
@@ -161,7 +163,7 @@ class _TaskViewState extends State<TaskView> {
     );
   }
 
-  RichText _buildHeader(TextTheme textTheme) {
+  Widget _buildHeader(TextTheme textTheme) {
     return RichText(
       text: TextSpan(
         children: [
@@ -180,15 +182,13 @@ class _TaskViewState extends State<TaskView> {
   }
 
   void _updateTask() {
-    if (_formKey.currentState!.validate()) {
-      widget.task!
-        ..title = _titleController.text
-        ..description = _descriptionController.text
-        ..createdAtTime = _selectedTime
-        ..createdAtDate = _selectedDate;
-      _hiveData.updateTask(task: widget.task!);
-      Navigator.pop(context);
-    }
+    widget.task!
+      ..title = _titleController.text
+      ..description = _descriptionController.text
+      ..createdAtTime = _selectedTime
+      ..createdAtDate = _selectedDate;
+    _hiveData.updateTask(task: widget.task!);
+    Navigator.pop(context);
   }
 
   void _deleteTask(TaskModel task) {
@@ -197,16 +197,14 @@ class _TaskViewState extends State<TaskView> {
   }
 
   void _addNewTask() {
-    if (_formKey.currentState!.validate()) {
-      _hiveData.addNewTask(
-        task: TaskModel.createNewTask(
-          date: _selectedDate,
-          time: _selectedTime,
-          description: _descriptionController.text,
-          title: _titleController.text,
-        ),
-      );
-      Navigator.pop(context);
-    }
+    _hiveData.addNewTask(
+      task: TaskModel.createNewTask(
+        date: _selectedDate,
+        time: _selectedTime,
+        description: _descriptionController.text,
+        title: _titleController.text,
+      ),
+    );
+    Navigator.pop(context);
   }
 }
