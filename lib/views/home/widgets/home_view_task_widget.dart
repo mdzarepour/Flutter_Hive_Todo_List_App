@@ -1,7 +1,10 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_todo/extentions/space_exs.dart';
 import 'package:hive_todo/models/task_model.dart';
+import 'package:hive_todo/models/task_view_type_enum.dart';
+import 'package:hive_todo/views/tasks/task_view.dart';
 import 'package:intl/intl.dart';
 
 class HomeViewTaskWidget extends StatefulWidget {
@@ -18,6 +21,14 @@ class _HomeViewTaskWidgetState extends State<HomeViewTaskWidget> {
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
     return GestureDetector(
+      onTap: () {
+        final route = CupertinoPageRoute(
+          builder: (context) {
+            return TaskView(TaskViewTypeEnum.update, widget.task);
+          },
+        );
+        Navigator.push(context, route);
+      },
       child: FadeInUp(
         from: 25,
         child: Container(

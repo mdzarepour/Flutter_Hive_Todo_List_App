@@ -7,13 +7,13 @@ class TaskModel extends HiveObject {
   @HiveField(0)
   final String id;
   @HiveField(1)
-  final String description;
+  String description;
   @HiveField(2)
-  final DateTime createdAtTime;
+  DateTime createdAtTime;
   @HiveField(3)
-  final DateTime createdAtDate;
+  DateTime createdAtDate;
   @HiveField(4)
-  final String title;
+  String title;
   @HiveField(5)
   bool isCompleted;
 

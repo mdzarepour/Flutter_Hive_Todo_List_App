@@ -17,8 +17,7 @@ class _HomeViewFabState extends State<HomeViewFab> {
     return FloatingActionButton(
       onPressed: () {
         final route = CupertinoPageRoute(
-          builder: (context) =>
-              const TaskView(taskViewType: TaskViewTypeEnum.create),
+          builder: (context) => const TaskView(TaskViewTypeEnum.create),
         );
         Navigator.push(context, route);
       },

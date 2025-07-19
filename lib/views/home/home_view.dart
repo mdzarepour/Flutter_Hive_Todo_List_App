@@ -4,7 +4,6 @@ import 'package:hive_todo/core/constants/app_strings.dart';
 import 'package:hive_todo/data/hive_data.dart';
 import 'package:hive_todo/extentions/space_exs.dart';
 import 'package:hive_todo/main.dart';
-import 'package:hive_todo/models/task_model.dart';
 import 'package:hive_todo/views/home/components/home_view_appbar.dart';
 import 'package:hive_todo/views/home/components/home_view_drawer.dart';
 import 'package:hive_todo/views/home/components/home_view_fab.dart';

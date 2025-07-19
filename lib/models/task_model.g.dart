@@ -1,10 +1,4 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
-
 part of 'task_model.dart';
-
-// **************************************************************************
-// TypeAdapterGenerator
-// **************************************************************************
 
 class TaskModelAdapter extends TypeAdapter<TaskModel> {
   @override
@@ -22,7 +16,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       createdAtDate: fields[3] as DateTime,
       description: fields[1] as String,
       title: fields[4] as String,
-      isCompleted: fields[5] == null ? false : fields[5] as bool,
+      isCompleted: fields[5] as bool,
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker_fork/flutter_cupertino_date_picker_fork.dart';
 import 'package:hive_todo/core/constants/app_strings.dart';
 import 'package:hive_todo/core/theme/app_theme.dart';
+import 'package:hive_todo/data/hive_data.dart';
 import 'package:hive_todo/extentions/space_exs.dart';
 import 'package:hive_todo/main.dart';
 import 'package:hive_todo/models/task_model.dart';
@@ -10,20 +11,32 @@ import 'package:hive_todo/views/tasks/components/task_view_appbar.dart';
 import 'package:hive_todo/views/tasks/widgets/task_view_inputWidget.dart';
 import 'package:hive_todo/views/tasks/widgets/task_view_date_time_picker.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:intl/intl.dart';
 
 class TaskView extends StatefulWidget {
   final TaskViewTypeEnum taskViewType;
-  const TaskView({super.key, required this.taskViewType});
+  final TaskModel? task;
+  const TaskView(this.taskViewType, [this.task]);
 
   @override
   State<TaskView> createState() => _TaskViewState();
 }
 
 class _TaskViewState extends State<TaskView> {
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController descriptiomController = TextEditingController();
-  late DateTime _time = DateTime.now();
-  late DateTime _date = DateTime.now();
+  late HiveData hiveData;
+  late TextEditingController titleController;
+  late TextEditingController descriptiomController;
+  DateTime _time = DateTime.now();
+  DateTime _date = DateTime.now();
+
+  @override
+  void initState() {
+    titleController = TextEditingController(text: widget.task?.title);
+    descriptiomController = TextEditingController(
+      text: widget.task?.description,
+    );
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -34,6 +47,7 @@ class _TaskViewState extends State<TaskView> {
 
   @override
   Widget build(BuildContext context) {
+    hiveData = BaseWidget.of(context).hiveData;
     final ColorScheme scheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
     return GestureDetector(
@@ -57,20 +71,19 @@ class _TaskViewState extends State<TaskView> {
                   hint: AppStrings.taskViewInputOne,
                   controller: titleController,
                 ),
-                25.h, // Vertical spacing
+                25.h,
                 TaskViewInputWidget(
                   controller: descriptiomController,
                   hint: AppStrings.taskViewInputTwo,
                 ),
-                50.h, // Vertical spacing
-                // Date picker widget
+                50.h,
                 TaskViewDateTimePicker(
-                  buttonTitle: AppStrings.taskViewSelectDate,
+                  buttonTitle: DateFormat('yyyy-MM-dd').format(_date),
                   title: AppStrings.taskViewDate,
                   pickerWidget: DatePickerWidget(
                     pickerTheme: AppTheme.timeDatePickerTheme,
                     onMonthChangeStartWithFirstDate: true,
-                    initialDateTime: DateTime.now(),
+                    initialDateTime: _date,
                     onChange: (dateTime, _) {
                       setState(() {
                         _date = dateTime;
@@ -80,20 +93,30 @@ class _TaskViewState extends State<TaskView> {
                 ),
                 25.h,
                 TaskViewDateTimePicker(
+                  buttonTitle: DateFormat('hh : mm : ss a').format(_time),
+                  title: AppStrings.taskViewTime,
                   pickerWidget: TimePickerWidget(
                     pickerTheme: AppTheme.timeDatePickerTheme,
-
+                    initDateTime: _time,
                     onChange: (dateTime, _) {
                       setState(() {
                         _time = dateTime;
                       });
                     },
                   ),
-                  buttonTitle: AppStrings.taskViewSelectTime,
-                  title: AppStrings.taskViewTime,
                 ),
-                50.h, // Vertical spacing
-                _buildbottomButtons(context),
+                50.h,
+                if (widget.taskViewType == TaskViewTypeEnum.update)
+                  _buildbottomButtons(context),
+                if (widget.taskViewType == TaskViewTypeEnum.create)
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton.icon(
+                      onPressed: _addNewTask,
+                      icon: const Icon(Iconsax.add_circle),
+                      label: const Text(AppStrings.taskViewAddTask),
+                    ),
+                  ),
               ],
             ),
           ),
@@ -107,14 +130,19 @@ class _TaskViewState extends State<TaskView> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         FilledButton.icon(
-          onPressed: () {},
+          onPressed: () => deleteTask(widget.task!),
           icon: const Icon(Iconsax.trash),
           label: const Text(AppStrings.taskViewDeleteTask),
         ),
-        FilledButton.icon(
-          onPressed: _addNewTask,
-          icon: const Icon(Iconsax.add_circle),
-          label: const Text(AppStrings.taskViewAddTask),
+        20.w,
+        Expanded(
+          child: FilledButton.icon(
+            onPressed: () {
+              updateTask();
+            },
+            icon: const Icon(Iconsax.arrow_up_2),
+            label: const Text('update'),
+          ),
         ),
       ],
     );
@@ -134,17 +162,27 @@ class _TaskViewState extends State<TaskView> {
     );
   }
 
+  void updateTask() {
+    widget.task?.title = titleController.text;
+    widget.task?.description = descriptiomController.text;
+    widget.task?.createdAtTime = _time;
+    widget.task?.createdAtDate = _date;
+    hiveData.updateTask(task: widget.task!);
+    Navigator.pop(context);
+  }
+
+  void deleteTask(TaskModel task) {
+    hiveData.deleteTask(task: task);
+    Navigator.pop(context);
+  }
+
   void _addNewTask() {
-    final String currentTitle = titleController.text;
-    final String currentDescription = descriptiomController.text;
-    final DateTime selectedDate = _date;
-    final DateTime selectedTime = _time;
-    BaseWidget.of(context).hiveData.addNewTask(
+    hiveData.addNewTask(
       task: TaskModel.createNewTask(
-        date: selectedDate,
-        time: selectedTime,
-        description: currentDescription,
-        title: currentTitle,
+        date: _date,
+        time: _time,
+        description: descriptiomController.text,
+        title: titleController.text,
       ),
     );
     Navigator.pop(context);
