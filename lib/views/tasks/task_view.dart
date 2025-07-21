@@ -107,6 +107,7 @@ class _TaskViewState extends State<TaskView> {
               50.h,
               // date picker -->
               TaskViewDateTimePicker(
+                isForTime: false,
                 dateTimeValue: _selectedDate,
                 title: AppStr.taskViewDate,
                 pickerWidget: DatePickerWidget(
@@ -123,6 +124,7 @@ class _TaskViewState extends State<TaskView> {
               25.h,
               // time picker -->
               TaskViewDateTimePicker(
+                isForTime: true,
                 dateTimeValue: _selectedTime,
                 title: AppStr.taskViewTime,
                 pickerWidget: TimePickerWidget(

@@ -3,16 +3,17 @@ import 'package:hive_todo/core/constants/app_strings.dart';
 import 'package:intl/intl.dart';
 
 class TaskViewDateTimePicker extends StatelessWidget {
+  final Widget pickerWidget;
+  final DateTime dateTimeValue;
+  final String title;
+  final bool isForTime;
   const TaskViewDateTimePicker({
     super.key,
     required this.pickerWidget,
     required this.dateTimeValue,
     required this.title,
+    required this.isForTime,
   });
-
-  final Widget pickerWidget;
-  final DateTime dateTimeValue;
-  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,9 @@ class TaskViewDateTimePicker extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            DateFormat(AppStr.timeFormatter).format(dateTimeValue),
+            DateFormat(
+              isForTime ? AppStr.timeFormatter : AppStr.dateFormatter,
+            ).format(dateTimeValue),
             style: textTheme.headlineMedium!.copyWith(color: Colors.white),
           ),
         ),
