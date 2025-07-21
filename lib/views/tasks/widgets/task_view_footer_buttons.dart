@@ -27,7 +27,7 @@ class TaskViewFooterButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         FilledButton.icon(
-          onPressed: () => deleteTask,
+          onPressed: deleteTask,
           icon: const Icon(Iconsax.trash),
           label: const Text(AppStr.taskViewDeleteTask),
         ),

@@ -138,9 +138,9 @@ class _TaskViewState extends State<TaskView> {
               50.h,
               TaskViewFooterButtons(
                 isTypeUpdate: isTypeUpdate,
-                addNewTask: _addNewTask,
-                deleteTask: _deleteTask,
-                updateTask: _updateTask,
+                addNewTask: () => _addNewTask(),
+                deleteTask: () => _deleteTask(),
+                updateTask: () => _updateTask(),
               ),
             ],
           ),
