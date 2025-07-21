@@ -23,6 +23,8 @@ class TaskView extends StatefulWidget {
 }
 
 class _TaskViewState extends State<TaskView> {
+  late final bool isTypeUpdate;
+
   late final TextEditingController _titleController;
   late final TextEditingController _descripController;
 
@@ -34,6 +36,8 @@ class _TaskViewState extends State<TaskView> {
   @override
   void initState() {
     super.initState();
+    isTypeUpdate = widget.taskViewType == TaskViewTypeEnum.update;
+
     _titleController = TextEditingController(text: widget.task?.title);
     _descripController = TextEditingController(text: widget.task?.description);
 
@@ -68,17 +72,21 @@ class _TaskViewState extends State<TaskView> {
                   children: [
                     TextSpan(
                       style: textTheme.headlineMedium,
-                      text: AppStr.taskViewAddOne,
+                      text: isTypeUpdate
+                          ? AppStr.taskViewUpdateYour
+                          : AppStr.taskViewAddNew,
                     ),
                     TextSpan(
                       style: textTheme.bodyLarge,
-                      text: AppStr.taskViewAddTwo,
+                      text: AppStr.taskViewTask,
                     ),
                   ],
                 ),
               ),
               Text(
-                AppStr.taskViewHeader,
+                isTypeUpdate
+                    ? AppStr.taskViewHeaderUpdate
+                    : AppStr.taskViewHeaderCreate,
                 textAlign: TextAlign.center,
                 style: textTheme.headlineMedium,
               ),
@@ -129,7 +137,7 @@ class _TaskViewState extends State<TaskView> {
               ),
               50.h,
               TaskViewFooterButtons(
-                taskViewType: widget.taskViewType,
+                isTypeUpdate: isTypeUpdate,
                 addNewTask: _addNewTask,
                 deleteTask: _deleteTask,
                 updateTask: _updateTask,

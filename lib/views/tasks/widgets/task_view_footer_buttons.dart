@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:hive_todo/core/constants/app_strings.dart';
 import 'package:hive_todo/extentions/space_exs.dart';
 
-import 'package:hive_todo/models/task_view_type_enum.dart';
 import 'package:iconsax/iconsax.dart';
 
 class TaskViewFooterButtons extends StatelessWidget {
-  final TaskViewTypeEnum taskViewType;
+  final bool isTypeUpdate;
   final Function() deleteTask;
   final Function() updateTask;
   final Function() addNewTask;
   const TaskViewFooterButtons({
     super.key,
-    required this.taskViewType,
+    required this.isTypeUpdate,
     required this.addNewTask,
     required this.deleteTask,
     required this.updateTask,
@@ -20,9 +19,7 @@ class TaskViewFooterButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return taskViewType == TaskViewTypeEnum.update
-        ? _buildUpdateDeleteButtons()
-        : _buildCreateButton();
+    return isTypeUpdate ? _buildUpdateDeleteButtons() : _buildCreateButton();
   }
 
   Widget _buildUpdateDeleteButtons() {

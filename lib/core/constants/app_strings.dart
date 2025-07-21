@@ -1,11 +1,15 @@
 class AppStr {
   AppStr._();
-  static const String taskViewHeader = 'It seems you want to do something';
+  static const String taskViewHeaderCreate =
+      'It seems you want to do something';
+  static const String taskViewHeaderUpdate =
+      'now you can update your task details';
   static const String taskViewTitle = 'title';
   static const String taskViewDescription = 'description';
-  static const String taskViewAddOne = 'Add New ';
+  static const String taskViewAddNew = 'Add New ';
+  static const String taskViewUpdateYour = 'Update Your ';
   static const String taskViewUpdate = 'Update';
-  static const String taskViewAddTwo = 'Task';
+  static const String taskViewTask = 'Task';
   static const String taskViewTime = 'Time';
   static const String taskViewDate = 'Date';
   static const String taskViewSelectTime = 'Select Time';
