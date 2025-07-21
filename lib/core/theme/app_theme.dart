@@ -8,7 +8,15 @@ class AppTheme {
   AppTheme._();
   static ThemeData appThem = ThemeData(
     filledButtonTheme: _getFilledButton(),
-
+    bottomSheetTheme: const BottomSheetThemeData(
+      clipBehavior: Clip.hardEdge,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+    ),
     floatingActionButtonTheme: _getFloatinButtonTheme(),
     textTheme: AppTextTheme.appTextTheme,
     inputDecorationTheme: _getInpuTheme(),

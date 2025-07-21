@@ -33,9 +33,7 @@ class BaseWidget extends InheritedWidget {
 
   static BaseWidget of(BuildContext context) {
     final base = context.dependOnInheritedWidgetOfExactType<BaseWidget>();
-    if (base == null) {
-      throw StateError(AppStrings.baseWidgetError);
-    }
+    if (base == null) throw StateError(AppStr.baseWidgetError);
     return base;
   }
 

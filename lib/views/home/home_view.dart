@@ -76,7 +76,7 @@ class _HomeViewState extends State<HomeView> {
             children: [
               Icon(Iconsax.trash, color: colorScheme.primaryContainer),
               10.w,
-              Text(AppStrings.homeViewDelete, style: textTheme.titleMedium),
+              Text(AppStr.homeViewDelete, style: textTheme.titleMedium),
             ],
           ),
           onDismissed: (_) => _hiveData.deleteTask(task: taskList[index]),
@@ -97,15 +97,12 @@ class _HomeViewState extends State<HomeView> {
           child: LottieBuilder.asset(
             animate: _hiveData.taskBox.isEmpty,
             height: 200,
-            AppStrings.homeViewEmptyJson,
+            AppStr.homeViewEmptyJson,
           ),
         ),
         FadeInUp(
           from: 30,
-          child: Text(
-            AppStrings.homeViewEmpty,
-            style: textTheme.headlineMedium,
-          ),
+          child: Text(AppStr.homeViewEmpty, style: textTheme.headlineMedium),
         ),
       ],
     );
@@ -131,7 +128,7 @@ class _HomeViewState extends State<HomeView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(AppStrings.homeViewMyTasks, style: textTheme.headlineLarge),
+            Text(AppStr.homeViewMyTasks, style: textTheme.headlineLarge),
             10.h,
             Text(
               '${taskListStats[0]} of ${taskListStats[1]}',

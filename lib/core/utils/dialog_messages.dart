@@ -12,10 +12,10 @@ dynamic showEmptyTaskListWarningDialog(BuildContext context) {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(10),
         ),
-        title: const Text(AppStrings.dialogOops),
+        title: const Text(AppStr.dialogOops),
         content: const Text(
           style: TextStyle(color: AppColors.materialWhite),
-          AppStrings.dialogEmptyTask,
+          AppStr.dialogEmptyTask,
         ),
         actions: [
           10.h,
@@ -26,7 +26,7 @@ dynamic showEmptyTaskListWarningDialog(BuildContext context) {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text(AppStrings.dialogOk),
+                child: const Text(AppStr.dialogOk),
               ),
             ),
           ),
@@ -45,10 +45,10 @@ dynamic showTaskDeletingDialog(BuildContext context) {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(10),
         ),
-        title: const Text(AppStrings.dialogAreSure),
+        title: const Text(AppStr.dialogAreSure),
         content: const Text(
           style: TextStyle(color: AppColors.materialWhite),
-          AppStrings.dialogDeteleTask,
+          AppStr.dialogDeteleTask,
         ),
         actions: [
           10.h,
@@ -60,12 +60,12 @@ dynamic showTaskDeletingDialog(BuildContext context) {
                   await BaseWidget.of(context).hiveData.deleteAllTask();
                   Navigator.pop(context);
                 },
-                child: const Text(AppStrings.dialogDelete),
+                child: const Text(AppStr.dialogDelete),
               ),
               20.w,
               FilledButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text(AppStrings.dialogCancle),
+                child: const Text(AppStr.dialogCancle),
               ),
             ],
           ),

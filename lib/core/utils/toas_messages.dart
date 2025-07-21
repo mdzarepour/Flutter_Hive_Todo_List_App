@@ -8,8 +8,8 @@ dynamic addingTaskEmptyFieldsWarning(BuildContext context) {
     context,
     corner: 12,
     color: const Color.fromARGB(255, 35, 35, 38),
-    msg: AppStrings.dialogOops,
-    subMsg: AppStrings.toastPleaseInsert,
+    msg: AppStr.dialogOops,
+    subMsg: AppStr.toastPleaseInsert,
     duration: 2000,
     msgStyle: AppTextTheme.appTextTheme.headlineMedium,
   );

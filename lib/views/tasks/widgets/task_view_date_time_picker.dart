@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hive_todo/core/constants/app_strings.dart';
+import 'package:intl/intl.dart';
 
 class TaskViewDateTimePicker extends StatelessWidget {
   const TaskViewDateTimePicker({
     super.key,
     required this.pickerWidget,
-    required this.buttonTitle,
+    required this.dateTimeValue,
     required this.title,
   });
 
   final Widget pickerWidget;
-  final String buttonTitle;
+  final DateTime dateTimeValue;
   final String title;
 
   @override
@@ -35,23 +37,19 @@ class TaskViewDateTimePicker extends StatelessWidget {
     );
   }
 
-  Widget _buildPickerButton(
-    BuildContext context,
-    ColorScheme colorScheme,
-    TextTheme textTheme,
-  ) {
+  Widget _buildPickerButton(final context, final scheme, final textTheme) {
     return InkWell(
       onTap: () => _showPickerBottomSheet(context),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         height: double.infinity,
         decoration: BoxDecoration(
-          color: colorScheme.secondaryContainer,
+          color: scheme.secondaryContainer,
           borderRadius: BorderRadius.circular(5),
         ),
         child: Center(
           child: Text(
-            buttonTitle,
+            DateFormat(AppStr.timeFormatter).format(dateTimeValue),
             style: textTheme.headlineMedium!.copyWith(color: Colors.white),
           ),
         ),
@@ -62,13 +60,6 @@ class TaskViewDateTimePicker extends StatelessWidget {
   void _showPickerBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      clipBehavior: Clip.hardEdge,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-      ),
       builder: (context) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),

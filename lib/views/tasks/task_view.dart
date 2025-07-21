@@ -8,10 +8,9 @@ import 'package:hive_todo/main.dart';
 import 'package:hive_todo/models/task_model.dart';
 import 'package:hive_todo/models/task_view_type_enum.dart';
 import 'package:hive_todo/views/tasks/components/task_view_appbar.dart';
+import 'package:hive_todo/views/tasks/widgets/task_view_footer_buttons.dart';
 import 'package:hive_todo/views/tasks/widgets/task_view_input_widget.dart';
 import 'package:hive_todo/views/tasks/widgets/task_view_date_time_picker.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:intl/intl.dart';
 
 class TaskView extends StatefulWidget {
   final TaskViewTypeEnum taskViewType;
@@ -25,7 +24,7 @@ class TaskView extends StatefulWidget {
 
 class _TaskViewState extends State<TaskView> {
   late final TextEditingController _titleController;
-  late final TextEditingController _descriptionController;
+  late final TextEditingController _descripController;
 
   late DateTime _selectedTime;
   late DateTime _selectedDate;
@@ -35,10 +34,8 @@ class _TaskViewState extends State<TaskView> {
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController(text: widget.task?.title ?? '');
-    _descriptionController = TextEditingController(
-      text: widget.task?.description ?? '',
-    );
+    _titleController = TextEditingController(text: widget.task?.title);
+    _descripController = TextEditingController(text: widget.task?.description);
 
     _selectedDate = widget.task?.createdAtDate ?? DateTime.now();
     _selectedTime = widget.task?.createdAtTime ?? DateTime.now();
@@ -47,7 +44,7 @@ class _TaskViewState extends State<TaskView> {
   @override
   void dispose() {
     _titleController.dispose();
-    _descriptionController.dispose();
+    _descripController.dispose();
     super.dispose();
   }
 
@@ -58,7 +55,7 @@ class _TaskViewState extends State<TaskView> {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return GestureDetector(
-      onTap: _unfocusKeyboard,
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         backgroundColor: scheme.surface,
         appBar: const TaskViewAppbar(),
@@ -66,9 +63,22 @@ class _TaskViewState extends State<TaskView> {
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
             children: [
-              _buildHeader(textTheme),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      style: textTheme.headlineMedium,
+                      text: AppStr.taskViewAddOne,
+                    ),
+                    TextSpan(
+                      style: textTheme.bodyLarge,
+                      text: AppStr.taskViewAddTwo,
+                    ),
+                  ],
+                ),
+              ),
               Text(
-                AppStrings.taskViewHeader,
+                AppStr.taskViewHeader,
                 textAlign: TextAlign.center,
                 style: textTheme.headlineMedium,
               ),
@@ -76,48 +86,54 @@ class _TaskViewState extends State<TaskView> {
               // title input -->
               TaskViewInputWidget(
                 isDescription: false,
-                hint: AppStrings.taskViewInputOne,
+                hint: AppStr.taskViewInputOne,
                 controller: _titleController,
               ),
               25.h,
               // description input -->
               TaskViewInputWidget(
                 isDescription: true,
-                controller: _descriptionController,
-                hint: AppStrings.taskViewInputTwo,
+                controller: _descripController,
+                hint: AppStr.taskViewInputTwo,
               ),
               50.h,
               // date picker -->
               TaskViewDateTimePicker(
-                buttonTitle: DateFormat(
-                  AppStrings.dateFormatter,
-                ).format(_selectedDate),
-                title: AppStrings.taskViewDate,
+                dateTimeValue: _selectedDate,
+                title: AppStr.taskViewDate,
                 pickerWidget: DatePickerWidget(
                   pickerTheme: AppTheme.timeDatePickerTheme,
                   onMonthChangeStartWithFirstDate: true,
                   initialDateTime: _selectedDate,
                   onChange: (dateTime, indexes) {
-                    setState(() => _selectedDate = dateTime);
+                    setState(() {
+                      _selectedDate = dateTime;
+                    });
                   },
                 ),
               ),
               25.h,
               // time picker -->
               TaskViewDateTimePicker(
-                buttonTitle: DateFormat(
-                  AppStrings.timeFormatter,
-                ).format(_selectedTime),
-                title: AppStrings.taskViewTime,
+                dateTimeValue: _selectedTime,
+                title: AppStr.taskViewTime,
                 pickerWidget: TimePickerWidget(
                   pickerTheme: AppTheme.timeDatePickerTheme,
                   initDateTime: _selectedTime,
-                  onChange: (dateTime, _) =>
-                      setState(() => _selectedTime = dateTime),
+                  onChange: (dateTime, _) {
+                    setState(() {
+                      _selectedTime = dateTime;
+                    });
+                  },
                 ),
               ),
               50.h,
-              _buildActionButtons(),
+              TaskViewFooterButtons(
+                taskViewType: widget.taskViewType,
+                addNewTask: _addNewTask,
+                deleteTask: _deleteTask,
+                updateTask: _updateTask,
+              ),
             ],
           ),
         ),
@@ -125,74 +141,18 @@ class _TaskViewState extends State<TaskView> {
     );
   }
 
-  Widget _buildActionButtons() {
-    return widget.taskViewType == TaskViewTypeEnum.update
-        ? _buildUpdateDeleteButtons()
-        : _buildCreateButton();
-  }
-
-  Widget _buildUpdateDeleteButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        FilledButton.icon(
-          onPressed: () => _deleteTask(widget.task!),
-          icon: const Icon(Iconsax.trash),
-          label: const Text(AppStrings.taskViewDeleteTask),
-        ),
-        20.w,
-        Expanded(
-          child: FilledButton.icon(
-            onPressed: _updateTask,
-            icon: const Icon(Iconsax.arrow_up_2),
-            label: const Text(AppStrings.taskViewUpdate),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCreateButton() {
-    return SizedBox(
-      width: double.infinity,
-      child: FilledButton.icon(
-        onPressed: _addNewTask,
-        icon: const Icon(Iconsax.add_circle),
-        label: const Text(AppStrings.taskViewAddTask),
-      ),
-    );
-  }
-
-  Widget _buildHeader(TextTheme textTheme) {
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-            style: textTheme.headlineMedium,
-            text: AppStrings.taskViewAddOne,
-          ),
-          TextSpan(style: textTheme.bodyLarge, text: AppStrings.taskViewAddTwo),
-        ],
-      ),
-    );
-  }
-
-  void _unfocusKeyboard() {
-    FocusManager.instance.primaryFocus?.unfocus();
-  }
-
   void _updateTask() {
     widget.task!
       ..title = _titleController.text
-      ..description = _descriptionController.text
+      ..description = _descripController.text
       ..createdAtTime = _selectedTime
       ..createdAtDate = _selectedDate;
     _hiveData.updateTask(task: widget.task!);
     Navigator.pop(context);
   }
 
-  void _deleteTask(TaskModel task) {
-    _hiveData.deleteTask(task: task);
+  _deleteTask() {
+    _hiveData.deleteTask(task: widget.task!);
     Navigator.pop(context);
   }
 
@@ -201,7 +161,7 @@ class _TaskViewState extends State<TaskView> {
       task: TaskModel.createNewTask(
         date: _selectedDate,
         time: _selectedTime,
-        description: _descriptionController.text,
+        description: _descripController.text,
         title: _titleController.text,
       ),
     );

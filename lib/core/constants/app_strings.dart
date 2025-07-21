@@ -1,6 +1,6 @@
-class AppStrings {
-  AppStrings._();
-  static const String taskViewHeader = 'hmm its seems you want do something..';
+class AppStr {
+  AppStr._();
+  static const String taskViewHeader = 'It seems you want to do something';
   static const String taskViewTitle = 'title';
   static const String taskViewDescription = 'description';
   static const String taskViewAddOne = 'Add New ';
@@ -10,10 +10,10 @@ class AppStrings {
   static const String taskViewDate = 'Date';
   static const String taskViewSelectTime = 'Select Time';
   static const String taskViewSelectDate = 'Select Date';
-  static const String taskViewAddTask = 'Add Task';
+  static const String taskViewAddTask = 'Add a Task';
   static const String taskViewDeleteTask = 'Delete Task';
-  static const String taskViewInputOne = 'what are you planing ?';
-  static const String taskViewInputTwo = 'add note to remember';
+  static const String taskViewInputOne = 'what are you planning ?';
+  static const String taskViewInputTwo = 'Add a note to remember';
   static const String homeViewMyTasks = 'My Tasks';
   static const String homeViewDelete = 'This Task Was deleted';
   static const String homeViewEmpty = 'You Done All Tasks';

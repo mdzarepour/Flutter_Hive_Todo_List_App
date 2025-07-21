@@ -96,13 +96,13 @@ class _HomeViewTaskWidgetState extends State<HomeViewTaskWidget> {
                     Text(
                       style: textTheme.headlineMedium,
                       DateFormat(
-                        AppStrings.dateFormatter,
+                        AppStr.dateFormatter,
                       ).format(widget.task.createdAtDate),
                     ),
                     Text(
                       style: textTheme.titleMedium,
                       DateFormat(
-                        AppStrings.timeFormatter,
+                        AppStr.timeFormatter,
                       ).format(widget.task.createdAtTime),
                     ),
                   ],
