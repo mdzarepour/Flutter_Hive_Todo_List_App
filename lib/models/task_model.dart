@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:hive_todo/core/constants/app_strings.dart';
 import 'package:uuid/uuid.dart';
 part 'task_model.g.dart';
 
@@ -37,8 +38,8 @@ class TaskModel extends HiveObject {
       id: uuid.v1(),
       createdAtTime: time,
       createdAtDate: date,
-      description: description,
-      title: title,
+      description: description == '' ? AppStr.taskViewDescription : description,
+      title: title == '' ? AppStr.taskViewTitle : title,
       isCompleted: false,
     );
   }
