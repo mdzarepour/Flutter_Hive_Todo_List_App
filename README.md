@@ -14,7 +14,7 @@ Hive Todo is a small-scale application designed to learn how to implement CRUD o
 
 <img width="300"  alt="Screenshot_1752949302" src="https://github.com/user-attachments/assets/0f76de97-4750-4861-ac52-f609957cc3ba" />
 <img width="300"  alt="Screenshot_1752949325" src="https://github.com/user-attachments/assets/9572c766-dfaf-4b5b-a82b-a8b767546075" />
-  <img width="300"  alt="Screenshot_1752949404" src="https://github.com/user-attachments/assets/57451519-5b33-4943-9732-ca8eb960af47" />
+  
 
 
 
